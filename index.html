@@ -518,9 +518,9 @@
     </section>
   </main>
 
-  <footer class="mt-xl flex w-full flex-col items-center justify-between gap-md bg-[#000000] px-margin-desktop py-xl md:flex-row">
-    <div class="text-headline-md font-headline-md text-[#ffffff]" data-i18n="brandName">举牌图生成器</div>
-    <div class="flex flex-col items-center gap-sm">
+  <footer class="mt-xl grid w-full grid-cols-1 items-center gap-md bg-[#000000] px-margin-desktop py-xl md:grid-cols-3">
+    <div class="text-headline-md font-headline-md text-[#ffffff] md:justify-self-start" data-i18n="brandName">举牌图生成器</div>
+    <div class="flex flex-col items-center gap-md">
       <div class="flex flex-wrap justify-center gap-md">
         <a id="terms-link" class="!text-[16px] text-label-sm text-[#ffffff] transition-all duration-300 hover:text-[#ffffff] hover:underline" href="terms.html" data-i18n="footerTerms">服务条款</a>
         <a id="privacy-link" class="!text-[16px] text-label-sm text-[#ffffff] transition-all duration-300 hover:text-[#ffffff] hover:underline" href="privacy.html" data-i18n="footerPrivacy">隐私政策</a>
@@ -534,8 +534,9 @@
         </button>
         <a class="hidden text-label-sm text-[#ffffff] transition-all duration-300 hover:text-[#ffffff] hover:underline" href="#" data-i18n="footerApi">API 文档</a>
       </div>
+      <div class="!text-[16px] text-label-sm text-[#9ca3af] mt-[8px]" data-i18n="footerCopyright">© 2026 举牌图生成器. 保留所有权利。</div>
       <a
-        class="!text-[16px] text-label-sm text-[#9ca3af] transition-all duration-300 hover:text-[#d1d5db] hover:underline"
+        class="!text-[16px] text-label-sm text-[#9ca3af] transition-all duration-300 hover:text-[#d1d5db] hover:underline mt-[-12px]"
         href="https://beian.miit.gov.cn/"
         target="_blank"
         rel="noopener noreferrer"
@@ -543,7 +544,7 @@
         粤ICP备2026075417号
       </a>
     </div>
-    <div class="!text-[16px] text-label-sm text-[#ffffff] md:self-start" data-i18n="footerCopyright">© 2026 举牌图生成器. 保留所有权利。</div>
+    <div class="hidden md:block" aria-hidden="true"></div>
   </footer>
   <div id="support-modal" class="hidden fixed inset-0 z-[70] items-center justify-center bg-black/55 px-base py-lg">
     <div class="w-full max-w-[520px] rounded-xl bg-white p-lg shadow-2xl">
