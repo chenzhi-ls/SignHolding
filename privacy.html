@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>隐私政策 - 举牌图生成器</title>
+  <meta name="description" content="举牌图生成器隐私政策，说明站点可能处理的信息类型、使用目的、存储方式和用户权利。">
+  <link rel="icon" href="img/icon.png" type="image/png">
+  <link rel="apple-touch-icon" href="img/icon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Public+Sans:wght@300..700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --page-bg: #f8f9fa;
+      --card-bg: rgba(255, 255, 255, 0.88);
+      --text: #191c1d;
+      --muted: #5f6374;
+      --primary: #124af0;
+      --border: rgba(18, 74, 240, 0.08);
+      --shadow: 0 18px 40px rgba(18, 74, 240, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--page-bg);
+      color: var(--text);
+      font-family: "Public Sans", sans-serif;
+    }
+
+    .page-shell {
+      width: min(960px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 40px 0 64px;
+    }
+
+    .policy-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      padding: 32px;
+    }
+
+    .policy-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 24px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      background: #edf1f7;
+      border-radius: 999px;
+      padding: 3px;
+      gap: 4px;
+    }
+
+    .lang-btn {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .lang-btn.is-active {
+      background: #ffffff;
+      color: var(--primary);
+      box-shadow: 0 4px 12px rgba(18, 74, 240, 0.12);
+    }
+
+    .brand {
+      font-family: "Quicksand", sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 0 0 8px;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: #124af0;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(32px, 4vw, 44px);
+      line-height: 1.15;
+    }
+
+    .lead {
+      margin: 0 0 28px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    section + section {
+      margin-top: 28px;
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      line-height: 1.3;
+    }
+
+    p {
+      margin: 0 0 12px;
+      color: #30343d;
+      line-height: 1.85;
+    }
+
+    ul,
+    ol {
+      margin: 0;
+      padding-left: 22px;
+      color: #30343d;
+      line-height: 1.85;
+    }
+
+    li + li {
+      margin-top: 8px;
+    }
+
+    .note {
+      margin-top: 28px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: #eef8f3;
+      color: #1f5a45;
+    }
+
+    .footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .hidden-panel {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .policy-card {
+        padding: 24px 20px;
+      }
+
+      .policy-header {
+        flex-direction: column;
+      }
+
+      .header-actions {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page-shell">
+    <article class="policy-card">
+      <div class="policy-header">
+        <div>
+          <p class="brand" data-copy="brand">举牌图生成器</p>
+          <p class="eyebrow" data-copy="updatedAt">最后更新日期：2026 年 6 月 2 日</p>
+        </div>
+        <div class="header-actions">
+          <div class="lang-switch" aria-label="Language switcher">
+            <button class="lang-btn is-active" type="button" data-lang-switch="zh">中文</button>
+            <button class="lang-btn" type="button" data-lang-switch="en">EN</button>
+          </div>
+          <a class="back-link" href="index.html" data-copy="backHome">返回首页</a>
+        </div>
+      </div>
+
+      <div data-lang-panel="zh">
+        <h1>隐私政策</h1>
+        <p class="lead">
+          本隐私政策用于说明举牌图生成器在你访问和使用本网站时，可能处理哪些信息、为什么处理这些信息，以及你享有的相关权利。请在使用本网站前认真阅读本政策。
+        </p>
+
+        <section>
+          <h2>1. 我们处理的信息类型</h2>
+          <p>根据当前站点的产品形态，我们可能处理的信息主要包括以下几类：</p>
+          <ul>
+            <li>访问日志信息：当你访问网站时，托管服务、CDN 或基础网络设施通常会记录必要的访问日志，例如 IP 地址、访问时间、请求路径、设备类型、浏览器类型和错误日志。</li>
+            <li>本地浏览器数据：为了提升使用体验，网站可能在你的浏览器中使用 `localStorage` 等本地存储机制保存少量偏好信息，例如语言选择。</li>
+            <li>页面内输入内容：你输入的文案、选择的样式、拖拽的位置和导出操作，默认主要在你的浏览器本地完成处理。</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>2. 我们目前不主动收集的内容</h2>
+          <p>在当前版本中，网站默认不要求你注册账号，也不主动要求你提交姓名、手机号、邮箱、身份证号、银行卡号等敏感个人信息。</p>
+          <p>
+            站点当前也不提供在线保存用户作品到平台服务器的公开功能。除非未来页面、功能说明或补充政策另行明确告知，否则你输入的举牌文案和生成结果默认不会被平台主动上传保存为个人资料库。
+          </p>
+        </section>
+
+        <section>
+          <h2>3. 信息使用目的</h2>
+          <p>我们处理相关信息的主要目的包括：</p>
+          <ol>
+            <li>保障网站和静态资源正常加载、访问和运行。</li>
+            <li>记住你的基础界面偏好，例如语言选择，提升连续使用体验。</li>
+            <li>排查页面故障、资源加载异常、兼容性问题和安全风险。</li>
+            <li>在必要时进行统计分析、服务优化和防滥用控制。</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>4. 第三方服务与共享说明</h2>
+          <p>
+            本网站可能使用第三方托管、CDN、字体、图标或前端资源服务。当你的浏览器请求这些资源时，相关第三方可能基于技术实现需要处理你的设备信息、网络请求信息或访问日志。
+          </p>
+          <p>
+            除法律法规另有要求、为维护网站安全稳定所必需，或你另行明确授权外，我们不会将你的个人信息出售给第三方。
+          </p>
+        </section>
+
+        <section>
+          <h2>5. Cookie 与本地存储</h2>
+          <p>
+            当前站点主要使用浏览器本地存储保存少量偏好设置，例如语言切换状态。这些数据通常保存在你的设备浏览器中，用于避免你每次刷新后都重新选择偏好。
+          </p>
+          <p>
+            你可以通过清除浏览器缓存、Cookie 或本地存储数据来删除相关记录，但这可能会导致页面偏好设置恢复默认状态。
+          </p>
+        </section>
+
+        <section>
+          <h2>6. 信息保存期限</h2>
+          <p>
+            保存在你本地浏览器中的偏好数据，会在本地持续存在，直至你主动清除浏览器数据或更换设备。网站托管或日志系统产生的访问记录，通常将在满足安全、运维、审计或法律合规所需的合理期限内保存，之后会依服务商策略删除或匿名化处理。
+          </p>
+        </section>
+
+        <section>
+          <h2>7. 你的权利</h2>
+          <p>在适用法律规定范围内，你通常享有以下权利：</p>
+          <ul>
+            <li>了解我们处理信息的规则和目的。</li>
+            <li>通过浏览器设置删除本地缓存、本地存储和相关网站数据。</li>
+            <li>停止继续使用本网站，以终止后续基于访问产生的处理活动。</li>
+            <li>在未来如平台提供联系方式和受理渠道时，就个人信息相关问题进行咨询、投诉或权利主张。</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>8. 未成年人保护</h2>
+          <p>
+            如你为未成年人，请在监护人指导下阅读并使用本网站。若监护人认为未成年人在未经同意情况下向网站提供了不应提供的信息，请通过平台届时公布的有效联系方式与我们联系，以便在合理范围内处理。
+          </p>
+        </section>
+
+        <section>
+          <h2>9. 政策更新</h2>
+          <p>
+            我们可能根据产品功能变化、法律法规要求或运营需要更新本隐私政策。更新后的版本将在本页面公布，并自公布之日起生效。若更新涉及重大变化，我们将尽量以更醒目的方式提示。
+          </p>
+        </section>
+
+        <section>
+          <h2>10. 联系与说明</h2>
+          <p>
+            当前站点如尚未提供独立客服入口或联系邮箱，可通过网站后续公布的联系方式与运营方取得联系。若本政策与未来上线的新功能说明存在差异，以届时明确展示并经你确认后的说明为准。
+          </p>
+        </section>
+
+        <div class="note">
+          重要提示：当前版本的文案编辑与下载主要在浏览器本地完成，但访问网站本身仍可能产生必要的网络请求日志和第三方静态资源访问记录。
+        </div>
+      </div>
+
+      <div class="hidden-panel" data-lang-panel="en">
+        <h1>Privacy Policy</h1>
+        <p class="lead">
+          This Privacy Policy explains what information SignGen may process when you access and use this website, why such information may be processed, and what rights you may have. Please read this policy carefully before using the website.
+        </p>
+
+        <section>
+          <h2>1. Types of Information We May Process</h2>
+          <p>Based on the current form of this website, the information we may process mainly includes:</p>
+          <ul>
+            <li>Access log information: when you visit the website, hosting services, CDNs, or underlying network infrastructure may record necessary access logs such as IP address, access time, request path, device type, browser type, and error logs.</li>
+            <li>Local browser data: to improve the user experience, the website may use local browser storage such as `localStorage` to save limited preference data, for example your language selection.</li>
+            <li>On-page input content: the text you type, the styles you choose, text positioning, and export actions are currently processed primarily within your browser.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>2. Information We Do Not Intentionally Collect at Present</h2>
+          <p>
+            In the current version, the website does not require account registration and does not intentionally ask you to submit sensitive personal information such as your full name, phone number, email address, identification number, or payment information.
+          </p>
+          <p>
+            The website also does not currently provide a public feature for saving user works to the platform server. Unless a future page, feature notice, or supplemental policy clearly states otherwise, the sign text you enter and the generated output are not actively uploaded and stored by the platform as a personal content archive.
+          </p>
+        </section>
+
+        <section>
+          <h2>3. Purposes of Use</h2>
+          <p>The information we process may be used for the following purposes:</p>
+          <ol>
+            <li>To ensure that the website and static resources load, operate, and remain accessible.</li>
+            <li>To remember your basic interface preferences, such as language selection, and provide a smoother experience.</li>
+            <li>To troubleshoot page failures, resource loading issues, compatibility problems, and security risks.</li>
+            <li>To carry out necessary statistical analysis, service optimization, and abuse prevention.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>4. Third-Party Services and Sharing</h2>
+          <p>
+            This website may use third-party hosting, CDN, font, icon, or front-end resource services. When your browser requests such resources, the relevant third party may process your device information, network request data, or access logs as required for technical delivery.
+          </p>
+          <p>
+            Unless otherwise required by law, necessary to maintain website security and stability, or expressly authorized by you, we do not sell your personal information to third parties.
+          </p>
+        </section>
+
+        <section>
+          <h2>5. Cookies and Local Storage</h2>
+          <p>
+            The current website mainly uses browser local storage to preserve limited preference settings, such as language selection. This data is typically stored in your browser on your device to avoid requiring repeated selection after every page refresh.
+          </p>
+          <p>
+            You may clear your browser cache, cookies, or local storage data to remove such records, but this may also reset the page preferences to their default state.
+          </p>
+        </section>
+
+        <section>
+          <h2>6. Data Retention Period</h2>
+          <p>
+            Preference data stored in your local browser remains there until you choose to clear your browser data or switch devices. Access logs generated by hosting or logging systems are generally retained only for a reasonable period necessary for security, operations, auditing, or legal compliance, after which they may be deleted or anonymized according to the service provider's policy.
+          </p>
+        </section>
+
+        <section>
+          <h2>7. Your Rights</h2>
+          <p>Within the scope permitted by applicable law, you generally have the right to:</p>
+          <ul>
+            <li>Understand the rules and purposes of how information is processed.</li>
+            <li>Delete local cache, local storage, and related website data through your browser settings.</li>
+            <li>Stop using the website, thereby ending any future processing related to your visits.</li>
+            <li>Make inquiries, complaints, or requests concerning personal information issues if contact channels are provided in the future.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>8. Protection of Minors</h2>
+          <p>
+            If you are a minor, please read and use this website under the guidance of a parent or legal guardian. If a guardian believes that a minor has provided information that should not have been provided, they should contact us through any effective contact method published by the platform in the future so that we may handle the matter within a reasonable scope.
+          </p>
+        </section>
+
+        <section>
+          <h2>9. Policy Updates</h2>
+          <p>
+            We may update this Privacy Policy based on product changes, legal requirements, or operational needs. Updated versions will be posted on this page and take effect upon publication. If an update involves significant changes, we will try to provide a more prominent notice.
+          </p>
+        </section>
+
+        <section>
+          <h2>10. Contact and Additional Notes</h2>
+          <p>
+            If the current website has not yet provided a dedicated support channel or contact email, you may contact the operator through any future contact method published on the website. If this policy differs from future feature notices or explicit consent flows, the later and more specific notice will prevail.
+          </p>
+        </section>
+
+        <div class="note">
+          Important note: text editing and download generation in the current version mainly happen locally in your browser, but visiting the website itself may still create necessary request logs and third-party static resource access records.
+        </div>
+      </div>
+
+      <div class="footer" data-copy="footer">© 2026 举牌图生成器</div>
+    </article>
+  </main>
+  <script>
+    (() => {
+      const copy = {
+        zh: {
+          title: "隐私政策 - 举牌图生成器",
+          description: "举牌图生成器隐私政策，说明站点可能处理的信息类型、使用目的、存储方式和用户权利。",
+          brand: "举牌图生成器",
+          updatedAt: "最后更新日期：2026 年 6 月 2 日",
+          backHome: "返回首页",
+          footer: "© 2026 举牌图生成器"
+        },
+        en: {
+          title: "Privacy Policy - SignGen",
+          description: "SignGen Privacy Policy describing what information may be processed, why it is used, and the rights available to users.",
+          brand: "SignGen",
+          updatedAt: "Last updated: June 2, 2026",
+          backHome: "Back to Home",
+          footer: "© 2026 SignGen"
+        }
+      };
+
+      const titleNode = document.querySelector("title");
+      const descriptionNode = document.querySelector('meta[name="description"]');
+      const switchButtons = Array.from(document.querySelectorAll("[data-lang-switch]"));
+      const panels = Array.from(document.querySelectorAll("[data-lang-panel]"));
+      const copyNodes = Array.from(document.querySelectorAll("[data-copy]"));
+
+      const applyLanguage = (lang) => {
+        const langCopy = copy[lang] || copy.zh;
+        document.documentElement.lang = lang === "en" ? "en" : "zh-CN";
+        window.localStorage.setItem("signgen-language", lang === "en" ? "en" : "zh");
+
+        if (titleNode) {
+          titleNode.textContent = langCopy.title;
+        }
+
+        if (descriptionNode) {
+          descriptionNode.setAttribute("content", langCopy.description);
+        }
+
+        switchButtons.forEach((button) => {
+          button.classList.toggle("is-active", button.dataset.langSwitch === lang);
+        });
+
+        panels.forEach((panel) => {
+          panel.classList.toggle("hidden-panel", panel.dataset.langPanel !== lang);
+        });
+
+        copyNodes.forEach((node) => {
+          const key = node.dataset.copy;
+          if (key && langCopy[key]) {
+            node.textContent = langCopy[key];
+          }
+        });
+      };
+
+      switchButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          applyLanguage(button.dataset.langSwitch === "en" ? "en" : "zh");
+        });
+      });
+
+      const params = new URLSearchParams(window.location.search);
+      const storedLang = window.localStorage.getItem("signgen-language");
+      const initialLang = params.get("lang") === "en" ? "en" : storedLang === "en" ? "en" : "zh";
+
+      applyLanguage(initialLang);
+    })();
+  </script>
+</body>
+</html>

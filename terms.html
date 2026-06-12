@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>服务条款 - 举牌图生成器</title>
+  <meta name="description" content="举牌图生成器服务条款，说明服务范围、使用规则、知识产权和责任限制。">
+  <link rel="icon" href="img/icon.png" type="image/png">
+  <link rel="apple-touch-icon" href="img/icon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Public+Sans:wght@300..700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --page-bg: #f8f9fa;
+      --card-bg: rgba(255, 255, 255, 0.88);
+      --text: #191c1d;
+      --muted: #5f6374;
+      --primary: #124af0;
+      --border: rgba(18, 74, 240, 0.08);
+      --shadow: 0 18px 40px rgba(18, 74, 240, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--page-bg);
+      color: var(--text);
+      font-family: "Public Sans", sans-serif;
+    }
+
+    .page-shell {
+      width: min(960px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 40px 0 64px;
+    }
+
+    .policy-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      padding: 32px;
+    }
+
+    .policy-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 24px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      background: #edf1f7;
+      border-radius: 999px;
+      padding: 3px;
+      gap: 4px;
+    }
+
+    .lang-btn {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .lang-btn.is-active {
+      background: #ffffff;
+      color: var(--primary);
+      box-shadow: 0 4px 12px rgba(18, 74, 240, 0.12);
+    }
+
+    .brand {
+      font-family: "Quicksand", sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 0 0 8px;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: #124af0;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(32px, 4vw, 44px);
+      line-height: 1.15;
+    }
+
+    .lead {
+      margin: 0 0 28px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    section + section {
+      margin-top: 28px;
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      line-height: 1.3;
+    }
+
+    p {
+      margin: 0 0 12px;
+      color: #30343d;
+      line-height: 1.85;
+    }
+
+    ol,
+    ul {
+      margin: 0;
+      padding-left: 22px;
+      color: #30343d;
+      line-height: 1.85;
+    }
+
+    li + li {
+      margin-top: 8px;
+    }
+
+    .note {
+      margin-top: 28px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: #eef3ff;
+      color: #27407c;
+    }
+
+    .footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .hidden-panel {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .policy-card {
+        padding: 24px 20px;
+      }
+
+      .policy-header {
+        flex-direction: column;
+      }
+
+      .header-actions {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page-shell">
+    <article class="policy-card">
+      <div class="policy-header">
+        <div>
+          <p class="brand" data-copy="brand">举牌图生成器</p>
+          <p class="eyebrow" data-copy="updatedAt">最后更新日期：2026 年 6 月 2 日</p>
+        </div>
+        <div class="header-actions">
+          <div class="lang-switch" aria-label="Language switcher">
+            <button class="lang-btn is-active" type="button" data-lang-switch="zh">中文</button>
+            <button class="lang-btn" type="button" data-lang-switch="en">EN</button>
+          </div>
+          <a class="back-link" href="index.html" data-copy="backHome">返回首页</a>
+        </div>
+      </div>
+
+      <div data-lang-panel="zh">
+        <h1>服务条款</h1>
+        <p class="lead">
+          欢迎使用举牌图生成器。为保障你与本服务运营方的合法权益，请在访问、浏览或使用本网站前认真阅读本服务条款。你访问或继续使用本网站，即视为你已阅读、理解并同意受本条款约束。
+        </p>
+
+        <section>
+          <h2>1. 服务内容</h2>
+          <p>
+            举牌图生成器目前提供基于浏览器的静态页面功能，包括模板浏览、文案编辑、字体与颜色调整、位置调整以及本地图片下载。本服务当前以在线可视化编辑和本地导出为主，不承诺提供账号体系、云端存储、历史记录同步、在线协作或人工审核服务。
+          </p>
+        </section>
+
+        <section>
+          <h2>2. 使用资格与使用承诺</h2>
+          <p>你承诺在使用本服务时遵守适用法律法规、公序良俗及本条款约定，并保证不会利用本服务从事以下行为：</p>
+          <ol>
+            <li>发布、制作、传播违法、侵权、诽谤、侮辱、淫秽、欺诈或其他不当内容。</li>
+            <li>侵犯他人的著作权、商标权、肖像权、隐私权、名誉权或其他合法权益。</li>
+            <li>以任何方式干扰、破坏、逆向攻击、批量滥用或恶意抓取本网站及其相关资源。</li>
+            <li>冒用他人身份、伪造来源，或将本服务用于误导、骚扰、诈骗等不当目的。</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>3. 用户内容与责任</h2>
+          <p>
+            你输入的文案、选择的图片样式、下载生成的内容以及由此形成的最终作品，应由你自行判断其合法性、准确性和适用性。除页面明确说明外，当前站点的文字编辑和图片导出主要在你的浏览器本地完成。
+          </p>
+          <p>
+            你应确保自己有权使用相关文案、图像元素或最终作品，并承担因你的使用行为引发的全部责任，包括但不限于侵权争议、投诉、索赔或行政处理。
+          </p>
+        </section>
+
+        <section>
+          <h2>4. 知识产权</h2>
+          <p>
+            本网站的页面结构、界面设计、代码、图标、文案组织方式及其他由运营方依法享有权利的内容，均受相关知识产权法律保护。未经书面许可，你不得对网站整体内容进行复制、镜像、二次分发、商业性售卖或用于搭建实质相同的服务。
+          </p>
+          <p>
+            对于站内示例模板、图片素材或其他第三方资源，如另有授权说明的，应按该等说明使用；未明确授予商业使用权的，不应擅自用于超出合理范围的用途。
+          </p>
+        </section>
+
+        <section>
+          <h2>5. 服务可用性与变更</h2>
+          <p>
+            本服务按“现状”和“可获得”基础提供。运营方可根据产品迭代、维护、合规要求或业务安排，对页面功能、可访问性、资源内容、访问地址或服务方式进行调整、暂停或终止，无需对所有功能永久可用作出保证。
+          </p>
+        </section>
+
+        <section>
+          <h2>6. 免责与责任限制</h2>
+          <p>
+            在适用法律允许的范围内，运营方不对以下情形承担责任：因网络故障、第三方 CDN 或字体服务不可达、浏览器兼容性差异、设备异常、缓存问题、不可抗力、第三方攻击或你自身操作不当导致的访问失败、样式异常、下载失败或数据丢失。
+          </p>
+          <p>
+            对于你基于本服务生成、传播、展示或商业使用的内容，由此引发的任何直接或间接损失、争议或索赔，应由你自行承担责任。
+          </p>
+        </section>
+
+        <section>
+          <h2>7. 第三方服务</h2>
+          <p>
+            本网站可能使用第三方静态资源、字体、图标、CDN 或托管服务。你访问相关资源时，可能同时受到第三方服务条款和隐私政策约束。对于第三方服务自身的可用性、安全性和合规性，运营方将在合理范围内进行选择，但不作绝对保证。
+          </p>
+        </section>
+
+        <section>
+          <h2>8. 条款更新</h2>
+          <p>
+            运营方可根据业务变化或法律要求对本条款进行更新。更新后的版本将在本页面公布，并自公布之日起生效。你在条款更新后继续使用本网站的，视为接受更新后的内容。
+          </p>
+        </section>
+
+        <section>
+          <h2>9. 适用与争议解决</h2>
+          <p>
+            本条款的订立、执行和解释，适用运营主体所在地的相关法律。因使用本服务引发的争议，双方应优先友好协商解决；协商不成的，可向有管辖权的人民法院提起诉讼，或按照运营方另行公布的争议解决机制处理。
+          </p>
+        </section>
+
+        <div class="note">
+          如你不同意本条款中的任何内容，请停止访问或使用本网站。
+        </div>
+      </div>
+
+      <div class="hidden-panel" data-lang-panel="en">
+        <h1>Terms of Service</h1>
+        <p class="lead">
+          Welcome to SignGen. To protect the lawful rights and interests of both you and the operator of this service, please read these Terms of Service carefully before accessing, browsing, or using this website. By accessing or continuing to use this website, you acknowledge that you have read, understood, and agreed to be bound by these terms.
+        </p>
+
+        <section>
+          <h2>1. Service Scope</h2>
+          <p>
+            SignGen currently provides browser-based static website features, including template browsing, text editing, font and color adjustment, text positioning, and local image download. The service is presently focused on online visual editing and local export, and does not guarantee account systems, cloud storage, history synchronization, collaboration, or manual review services.
+          </p>
+        </section>
+
+        <section>
+          <h2>2. Eligibility and User Commitments</h2>
+          <p>You agree to comply with applicable laws, regulations, and public order requirements when using this service, and you must not use this service to:</p>
+          <ol>
+            <li>Publish, create, or distribute unlawful, infringing, defamatory, abusive, obscene, fraudulent, or otherwise improper content.</li>
+            <li>Infringe the copyright, trademark, portrait rights, privacy rights, reputation rights, or other lawful rights of any third party.</li>
+            <li>Interfere with, damage, reverse engineer, abuse in bulk, or maliciously scrape this website or its related resources.</li>
+            <li>Impersonate others, falsify the source of content, or use this service for misleading, harassing, or fraudulent purposes.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>3. User Content and Responsibility</h2>
+          <p>
+            The text you enter, the visual style you choose, the downloaded output, and any resulting work should be assessed by you for legality, accuracy, and suitability. Unless explicitly stated otherwise, editing and image export on this website are primarily processed locally in your browser.
+          </p>
+          <p>
+            You are responsible for ensuring that you have the right to use any text, visual elements, or resulting works, and you bear all liability arising from your use, including but not limited to infringement disputes, complaints, claims, or administrative actions.
+          </p>
+        </section>
+
+        <section>
+          <h2>4. Intellectual Property</h2>
+          <p>
+            The website structure, interface design, code, icons, content organization, and other materials lawfully owned by the operator are protected by applicable intellectual property laws. Without prior written permission, you may not copy, mirror, redistribute, commercially sell, or use the overall website content to build a substantially similar service.
+          </p>
+          <p>
+            If example templates, images, or other third-party materials on the website are subject to separate licensing or usage notices, they must be used in accordance with those notices. If no commercial use right is explicitly granted, they should not be used beyond a reasonable scope.
+          </p>
+        </section>
+
+        <section>
+          <h2>5. Availability and Service Changes</h2>
+          <p>
+            This service is provided on an "as is" and "as available" basis. The operator may adjust, suspend, or terminate website features, accessibility, content, URLs, or service methods based on product iteration, maintenance, compliance requirements, or business arrangements, without guaranteeing that every feature will remain permanently available.
+          </p>
+        </section>
+
+        <section>
+          <h2>6. Disclaimer and Limitation of Liability</h2>
+          <p>
+            To the extent permitted by applicable law, the operator shall not be liable for failures, display issues, download failures, or data loss caused by network outages, unavailable third-party CDNs or font services, browser compatibility differences, device issues, caching problems, force majeure, third-party attacks, or user error.
+          </p>
+          <p>
+            You are solely responsible for any direct or indirect losses, disputes, or claims arising from content generated, distributed, displayed, or commercially used by you through this service.
+          </p>
+        </section>
+
+        <section>
+          <h2>7. Third-Party Services</h2>
+          <p>
+            This website may use third-party static resources, fonts, icons, CDNs, or hosting services. When you access those resources, you may also be subject to the applicable terms and privacy policies of such third parties. The operator will select third-party services within a reasonable scope, but cannot guarantee their absolute availability, security, or compliance.
+          </p>
+        </section>
+
+        <section>
+          <h2>8. Updates to These Terms</h2>
+          <p>
+            The operator may update these terms based on business changes or legal requirements. Updated versions will be posted on this page and will take effect upon publication. Continued use of the website after any update constitutes your acceptance of the revised terms.
+          </p>
+        </section>
+
+        <section>
+          <h2>9. Governing Law and Dispute Resolution</h2>
+          <p>
+            The formation, execution, and interpretation of these terms shall be governed by the laws applicable in the operator's jurisdiction. Any dispute arising from the use of this service should first be resolved through friendly consultation. If consultation fails, the dispute may be submitted to a court with competent jurisdiction or handled according to any dispute resolution mechanism separately announced by the operator.
+          </p>
+        </section>
+
+        <div class="note">
+          If you do not agree with any part of these terms, please stop accessing or using this website.
+        </div>
+      </div>
+
+      <div class="footer" data-copy="footer">© 2026 举牌图生成器</div>
+    </article>
+  </main>
+  <script>
+    (() => {
+      const copy = {
+        zh: {
+          title: "服务条款 - 举牌图生成器",
+          description: "举牌图生成器服务条款，说明服务范围、使用规则、知识产权和责任限制。",
+          brand: "举牌图生成器",
+          updatedAt: "最后更新日期：2026 年 6 月 2 日",
+          backHome: "返回首页",
+          footer: "© 2026 举牌图生成器"
+        },
+        en: {
+          title: "Terms of Service - SignGen",
+          description: "SignGen Terms of Service describing the service scope, usage rules, intellectual property, and limitation of liability.",
+          brand: "SignGen",
+          updatedAt: "Last updated: June 2, 2026",
+          backHome: "Back to Home",
+          footer: "© 2026 SignGen"
+        }
+      };
+
+      const titleNode = document.querySelector("title");
+      const descriptionNode = document.querySelector('meta[name="description"]');
+      const switchButtons = Array.from(document.querySelectorAll("[data-lang-switch]"));
+      const panels = Array.from(document.querySelectorAll("[data-lang-panel]"));
+      const copyNodes = Array.from(document.querySelectorAll("[data-copy]"));
+
+      const applyLanguage = (lang) => {
+        const langCopy = copy[lang] || copy.zh;
+        document.documentElement.lang = lang === "en" ? "en" : "zh-CN";
+        window.localStorage.setItem("signgen-language", lang === "en" ? "en" : "zh");
+
+        if (titleNode) {
+          titleNode.textContent = langCopy.title;
+        }
+
+        if (descriptionNode) {
+          descriptionNode.setAttribute("content", langCopy.description);
+        }
+
+        switchButtons.forEach((button) => {
+          button.classList.toggle("is-active", button.dataset.langSwitch === lang);
+        });
+
+        panels.forEach((panel) => {
+          panel.classList.toggle("hidden-panel", panel.dataset.langPanel !== lang);
+        });
+
+        copyNodes.forEach((node) => {
+          const key = node.dataset.copy;
+          if (key && langCopy[key]) {
+            node.textContent = langCopy[key];
+          }
+        });
+      };
+
+      switchButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          applyLanguage(button.dataset.langSwitch === "en" ? "en" : "zh");
+        });
+      });
+
+      const params = new URLSearchParams(window.location.search);
+      const storedLang = window.localStorage.getItem("signgen-language");
+      const initialLang = params.get("lang") === "en" ? "en" : storedLang === "en" ? "en" : "zh";
+
+      applyLanguage(initialLang);
+    })();
+  </script>
+</body>
+</html>

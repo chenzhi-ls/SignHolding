@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>举牌图生成器 - 创建你的定制举牌图</title>
+  <meta
+    name="description"
+    content="创建趣味举牌图，支持实时文字预览、样式调整与导出就绪布局。"
+  >
+  <meta property="og:title" content="举牌图生成器">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+  <meta property="og:image:alt" content="SignGen AI Editor 预览图">
+  <meta name="theme-color" content="#f8f9fa">
+
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+  <link
+    href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Public+Sans:wght@300..700&display=swap"
+    rel="stylesheet"
+  >
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="icon" href="img/icon.png" type="image/png">
+  <link rel="apple-touch-icon" href="img/icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-tertiary-fixed": "#351000",
+            "primary-container": "#2e5bff",
+            "on-surface": "#191c1d",
+            "on-error": "#ffffff",
+            "on-surface-variant": "#434656",
+            "secondary-container": "#a6f2cf",
+            "outline": "#747688",
+            "error-container": "#ffdad6",
+            "surface-variant": "#e1e3e4",
+            "inverse-primary": "#b8c3ff",
+            "tertiary-fixed-dim": "#ffb693",
+            "surface-container": "#edeeef",
+            "surface-dim": "#d9dadb",
+            "outline-variant": "#c4c5d9",
+            "on-primary-fixed-variant": "#0035be",
+            "on-error-container": "#93000a",
+            "surface-container-highest": "#e1e3e4",
+            "on-secondary-container": "#247155",
+            "on-secondary-fixed": "#002115",
+            "error": "#ba1a1a",
+            "on-primary-container": "#efefff",
+            "tertiary": "#903a00",
+            "primary-fixed-dim": "#b8c3ff",
+            "on-background": "#191c1d",
+            "surface-container-low": "#f3f4f5",
+            "primary-fixed": "#dde1ff",
+            "inverse-on-surface": "#f0f1f2",
+            "on-tertiary-container": "#ffece5",
+            "secondary-fixed-dim": "#8bd6b4",
+            "surface-bright": "#f8f9fa",
+            "on-tertiary": "#ffffff",
+            "secondary-fixed": "#a6f2cf",
+            "surface-container-lowest": "#ffffff",
+            "secondary": "#1b6b4f",
+            "on-tertiary-fixed-variant": "#7a3000",
+            "on-secondary-fixed-variant": "#00513a",
+            "inverse-surface": "#2e3132",
+            "on-primary-fixed": "#001356",
+            "background": "#f8f9fa",
+            "surface": "#f8f9fa",
+            "tertiary-container": "#b25015",
+            "tertiary-fixed": "#ffdbcb",
+            "surface-tint": "#124af0",
+            "on-primary": "#ffffff",
+            "on-secondary": "#ffffff",
+            "primary": "#0040e0"
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px"
+          },
+          spacing: {
+            lg: "48px",
+            base: "8px",
+            "margin-mobile": "16px",
+            "margin-desktop": "40px",
+            xs: "4px",
+            xl: "80px",
+            gutter: "20px",
+            sm: "12px",
+            md: "24px"
+          },
+          fontFamily: {
+            "label-sm": ["Public Sans", "sans-serif"],
+            "body-md": ["Public Sans", "sans-serif"],
+            "headline-md": ["Quicksand", "sans-serif"],
+            "headline-xl": ["Quicksand", "sans-serif"],
+            "body-lg": ["Public Sans", "sans-serif"],
+            "headline-lg-mobile": ["Quicksand", "sans-serif"],
+            "headline-lg": ["Quicksand", "sans-serif"],
+            "label-bold": ["Public Sans", "sans-serif"]
+          },
+          fontSize: {
+            "label-sm": ["12px", { lineHeight: "1.2", fontWeight: "500" }],
+            "body-md": ["16px", { lineHeight: "1.5", fontWeight: "400" }],
+            "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "600" }],
+            "headline-xl": ["48px", { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "700" }],
+            "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+            "headline-lg-mobile": ["28px", { lineHeight: "1.2", fontWeight: "700" }],
+            "headline-lg": ["32px", { lineHeight: "1.2", fontWeight: "700" }],
+            "label-bold": ["14px", { lineHeight: "1.2", letterSpacing: "0.05em", fontWeight: "600" }]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-surface text-on-surface transition-colors duration-300">
+  <header class="sticky top-0 z-50 flex w-full items-center justify-between bg-surface/80 px-margin-desktop py-base shadow-sm backdrop-blur-md max-w-full">
+    <div class="text-headline-md font-headline-xl tracking-tight text-primary" data-i18n="brandName">举牌图生成器</div>
+    <nav class="hidden items-center gap-md md:flex">
+      <a class="font-label-bold text-on-surface-variant transition-colors duration-200 hover:text-primary" href="#" data-i18n="navGallery">作品库</a>
+      <a class="font-label-bold text-on-surface-variant transition-colors duration-200 hover:text-primary" href="#" data-i18n="navHowItWorks">使用说明</a>
+      <a class="font-label-bold text-on-surface-variant transition-colors duration-200 hover:text-primary" href="#" data-i18n="navPricing">价格</a>
+    </nav>
+    <div class="flex items-center gap-sm">
+      <div class="flex items-center rounded-full bg-surface-container-low p-[2px] shadow-sm" aria-label="Language switcher">
+        <button
+          class="lang-btn rounded-full px-sm py-xs text-label-sm font-label-bold text-on-surface-variant transition-all"
+          type="button"
+          data-lang="zh"
+        >
+          中文
+        </button>
+        <button
+          class="lang-btn rounded-full px-sm py-xs text-label-sm font-label-bold text-on-surface-variant transition-all"
+          type="button"
+          data-lang="en"
+        >
+          EN
+        </button>
+      </div>
+      <button class="hidden rounded-full bg-primary px-md py-xs font-label-bold text-on-primary transition-all hover:shadow-lg active:scale-95" data-i18n="ctaCreateSign">创建举牌图</button>
+      <span class="material-symbols-outlined hidden cursor-pointer text-on-surface-variant">account_circle</span>
+    </div>
+  </header>
+
+  <main class="mx-auto min-h-screen max-w-[1440px] px-margin-mobile py-base md:px-margin-desktop">
+    <div class="mb-base flex items-center justify-between py-base">
+      <a class="group hidden items-center gap-xs font-label-bold text-primary transition-all hover:underline" href="#">
+        <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+        <span data-i18n="backToGallery">返回作品库</span>
+      </a>
+      <div class="hidden items-center gap-sm sm:flex">
+        <span class="rounded-full bg-tertiary-fixed px-sm py-xs text-label-sm font-label-bold text-on-tertiary-fixed" data-i18n="draftSaved">草稿已保存</span>
+        <span class="text-label-sm text-on-surface-variant" data-i18n="autosaveStatus">自动保存：2 分钟前</span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 items-start gap-md lg:grid-cols-12">
+      <section class="sticky top-24 lg:col-span-7 xl:col-span-8">
+        <div class="relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-xl bg-surface-container-highest shadow-xl">
+          <img
+            id="sign-preview-image"
+            class="absolute inset-0 h-full w-full object-cover"
+            src="img/3.png"
+            alt="五位女生一起举着空白木牌"
+          >
+          <div id="text-position-layer" class="relative z-10 flex h-[40%] w-[60%] items-center justify-center pointer-events-none transition-all duration-300">
+            <div
+              id="dynamic-text-container"
+              class="dynamic-sign-text pointer-events-auto w-full cursor-grab select-none px-base text-center font-bold text-[#1a1a1a] transition-all duration-300"
+              style="font-size: 32px; font-family: 'Quicksand', sans-serif;"
+            >
+              在这里输入你的举牌文案
+            </div>
+          </div>
+          <div class="absolute bottom-base right-base hidden gap-xs">
+            <button class="rounded-lg bg-surface/90 p-xs shadow-sm transition-colors hover:bg-white" type="button" data-i18n-aria-label="zoomInAria" aria-label="放大预览">
+              <span class="material-symbols-outlined text-[20px]">zoom_in</span>
+            </button>
+            <button class="rounded-lg bg-surface/90 p-xs shadow-sm transition-colors hover:bg-white" type="button" data-i18n-aria-label="fullscreenAria" aria-label="全屏查看预览">
+              <span class="material-symbols-outlined text-[20px]">fullscreen</span>
+            </button>
+          </div>
+        </div>
+        <div class="mt-md flex items-center justify-between font-label-sm uppercase tracking-wider text-on-surface-variant">
+          <span>
+            <span data-i18n="templatePrefix">模板：</span>
+            <span id="template-name-value">搞怪整活</span>
+          </span>
+          <div class="flex gap-sm">
+            <button class="flex items-center gap-xs transition-colors hover:text-primary" type="button" id="reset-btn">
+              <span class="material-symbols-outlined text-[16px]">replay</span>
+              <span data-i18n="reset">重置</span>
+            </button>
+            <button class="hidden items-center gap-xs transition-colors hover:text-primary" type="button">
+              <span class="material-symbols-outlined text-[16px]">share</span>
+              <span data-i18n="sharePreview">分享预览</span>
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      <aside class="space-y-md lg:col-span-5 xl:col-span-4">
+        <section class="glass-card rounded-xl border border-outline-variant/30 p-md shadow-sm">
+          <div class="mb-sm flex items-center gap-xs">
+            <span class="material-symbols-outlined text-[20px] text-primary">edit_note</span>
+            <h1 class="text-label-bold uppercase tracking-tight text-on-surface-variant" data-i18n="yourMessage">你的文案</h1>
+          </div>
+          <label class="visually-hidden" for="message-input" data-i18n="messageLabel">举牌文案输入框</label>
+          <textarea
+            id="message-input"
+            class="w-full resize-none rounded-lg border-none bg-surface-container-low p-sm font-body-md text-on-surface transition-all focus:ring-2 focus:ring-primary-container"
+            rows="4"
+            maxlength="60"
+            placeholder="输入你想显示在牌子上的文字..."
+            data-i18n-placeholder="messagePlaceholder"
+          ></textarea>
+          <div class="mt-xs flex justify-between text-label-sm text-outline">
+            <span data-i18n="maxChars">最多 60 个字符</span>
+            <span id="char-count">0/60</span>
+          </div>
+        </section>
+
+        <section class="glass-card rounded-xl border border-outline-variant/30 p-md shadow-sm">
+          <div class="mb-sm flex items-center gap-xs">
+            <span class="material-symbols-outlined text-[20px] text-primary">format_paint</span>
+            <h2 class="text-label-bold uppercase tracking-tight text-on-surface-variant" data-i18n="styleYourText">文字样式</h2>
+          </div>
+          <div class="space-y-base">
+            <div>
+              <label class="mb-xs block text-label-sm font-label-bold text-on-surface-variant" data-i18n="fontFamily">字体</label>
+              <div class="grid grid-cols-2 gap-xs">
+                <button class="font-selector-btn active-font rounded-lg border border-primary bg-primary-container p-xs text-left text-[14px] text-white transition-all font-headline-md" type="button" data-font="Quicksand" data-i18n="fontModernBold">现代加粗</button>
+                <button class="font-selector-btn rounded-lg border border-transparent bg-surface-container p-xs text-left text-[14px] text-on-surface-variant transition-all font-body-md hover:border-outline-variant" type="button" data-font="Public Sans" data-i18n="fontCleanSans">简洁无衬线</button>
+                <button class="font-selector-btn rounded-lg border border-transparent bg-surface-container p-xs text-left text-[14px] text-on-surface-variant transition-all font-serif hover:border-outline-variant" type="button" data-font="Impact" data-i18n="fontHeadlineImpact">海报标题</button>
+                <button class="font-selector-btn rounded-lg border border-transparent bg-surface-container p-xs text-left text-[14px] text-on-surface-variant transition-all hover:border-outline-variant" type="button" data-font="cursive" data-i18n="fontHandwritten">手写风格</button>
+              </div>
+            </div>
+
+            <div class="pt-sm">
+              <div class="mb-xs flex items-center justify-between">
+                <label class="text-label-sm font-label-bold text-on-surface-variant" for="size-slider" data-i18n="textSize">字号</label>
+                <span id="size-val" class="text-label-sm font-label-bold text-primary">32px</span>
+              </div>
+              <input
+                id="size-slider"
+                class="h-2 w-full cursor-pointer appearance-none rounded-full bg-surface-container-highest accent-primary"
+                type="range"
+                min="16"
+                max="64"
+                value="32"
+              >
+            </div>
+          </div>
+        </section>
+
+        <section class="glass-card rounded-xl border border-outline-variant/30 p-md shadow-sm">
+          <div class="mb-sm flex items-center gap-xs">
+            <span class="material-symbols-outlined text-[20px] text-primary">palette</span>
+            <h2 class="text-label-bold uppercase tracking-tight text-on-surface-variant" data-i18n="textColor">文字颜色</h2>
+          </div>
+          <div class="grid grid-cols-3 gap-xs">
+            <button class="color-btn active-color flex items-center justify-center gap-xs rounded-lg border border-primary bg-primary-container/20 p-xs text-label-sm font-label-bold text-on-surface transition-all" type="button" data-color="#1a1a1a">
+              <span class="inline-block h-4 w-4 rounded-full border border-outline-variant" style="background-color: #1a1a1a;"></span>
+              <span data-i18n="colorBlack">黑色</span>
+            </button>
+            <button class="color-btn flex items-center justify-center gap-xs rounded-lg border border-transparent bg-surface-container p-xs text-label-sm font-label-bold text-on-surface transition-all hover:border-outline-variant" type="button" data-color="#124af0">
+              <span class="inline-block h-4 w-4 rounded-full border border-outline-variant" style="background-color: #124af0;"></span>
+              <span data-i18n="colorBlue">蓝色</span>
+            </button>
+            <button class="color-btn flex items-center justify-center gap-xs rounded-lg border border-transparent bg-surface-container p-xs text-label-sm font-label-bold text-on-surface transition-all hover:border-outline-variant" type="button" data-color="#1b6b4f">
+              <span class="inline-block h-4 w-4 rounded-full border border-outline-variant" style="background-color: #1b6b4f;"></span>
+              <span data-i18n="colorGreen">绿色</span>
+            </button>
+            <button class="color-btn flex items-center justify-center gap-xs rounded-lg border border-transparent bg-surface-container p-xs text-label-sm font-label-bold text-on-surface transition-all hover:border-outline-variant" type="button" data-color="#903a00">
+              <span class="inline-block h-4 w-4 rounded-full border border-outline-variant" style="background-color: #903a00;"></span>
+              <span data-i18n="colorOrange">橙色</span>
+            </button>
+            <button class="color-btn flex items-center justify-center gap-xs rounded-lg border border-transparent bg-surface-container p-xs text-label-sm font-label-bold text-on-surface transition-all hover:border-outline-variant" type="button" data-color="#8b1fa9">
+              <span class="inline-block h-4 w-4 rounded-full border border-outline-variant" style="background-color: #8b1fa9;"></span>
+              <span data-i18n="colorPurple">紫色</span>
+            </button>
+            <button class="color-btn flex items-center justify-center gap-xs rounded-lg border border-transparent bg-surface-container p-xs text-label-sm font-label-bold text-on-surface transition-all hover:border-outline-variant" type="button" data-color="#ba1a1a">
+              <span class="inline-block h-4 w-4 rounded-full border border-outline-variant" style="background-color: #ba1a1a;"></span>
+              <span data-i18n="colorRed">红色</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="glass-card rounded-xl border border-outline-variant/30 p-md shadow-sm">
+          <div class="mb-sm flex items-center gap-xs">
+            <span class="material-symbols-outlined text-[20px] text-primary">open_with</span>
+            <h2 class="text-label-bold uppercase tracking-tight text-on-surface-variant" data-i18n="textPosition">文案位置</h2>
+          </div>
+          <div class="space-y-base">
+            <div>
+              <div class="mb-xs flex items-center justify-between">
+                <label class="text-label-sm font-label-bold text-on-surface-variant" for="position-x-slider" data-i18n="positionX">X 轴</label>
+                <span id="position-x-val" class="text-label-sm font-label-bold text-primary">0px</span>
+              </div>
+              <input
+                id="position-x-slider"
+                class="h-2 w-full cursor-pointer appearance-none rounded-full bg-surface-container-highest accent-primary"
+                type="range"
+                min="-200"
+                max="200"
+                value="0"
+              >
+            </div>
+            <div>
+              <div class="mb-xs flex items-center justify-between">
+                <label class="text-label-sm font-label-bold text-on-surface-variant" for="position-y-slider" data-i18n="positionY">Y 轴</label>
+                <span id="position-y-val" class="text-label-sm font-label-bold text-primary">0px</span>
+              </div>
+              <input
+                id="position-y-slider"
+                class="h-2 w-full cursor-pointer appearance-none rounded-full bg-surface-container-highest accent-primary"
+                type="range"
+                min="-200"
+                max="200"
+                value="0"
+              >
+            </div>
+          </div>
+        </section>
+
+        <section class="pt-base">
+          <button
+            id="generate-btn"
+            class="group relative w-full overflow-hidden rounded-xl bg-primary py-md text-[20px] font-semibold text-on-primary shadow-lg transition-all hover:-translate-y-1 hover:shadow-primary-container/40 active:scale-[0.98] md:text-[20px]"
+            type="button"
+          >
+            <span class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 group-hover:translate-x-full"></span>
+            <span class="relative flex items-center justify-center gap-sm">
+              <span data-generate-label>一键下载</span>
+              <span class="material-symbols-outlined">auto_awesome</span>
+            </span>
+          </button>
+          <p class="hidden mt-sm items-center justify-center gap-xs text-center text-label-sm text-outline">
+            <span class="material-symbols-outlined text-[14px]">bolt</span>
+            <span data-i18n="generateHint">约 5 秒生成</span>
+          </p>
+        </section>
+
+        <section class="hidden flex-wrap gap-xs pt-base">
+          <div class="flex items-center gap-xs rounded-full bg-tertiary-container px-sm py-xs text-label-sm font-label-bold text-on-tertiary-container shadow-sm">
+            <span class="material-symbols-outlined text-[14px]">trending_up</span>
+            <span data-i18n="chipTrending">热门模板</span>
+          </div>
+          <div class="flex items-center gap-xs rounded-full bg-secondary-container px-sm py-xs text-label-sm font-label-bold text-on-secondary-container shadow-sm">
+            <span class="material-symbols-outlined text-[14px]">verified</span>
+            <span data-i18n="chipHighRes">高清输出</span>
+          </div>
+        </section>
+
+      </aside>
+    </div>
+
+    <section id="album-section" class="glass-card mt-lg rounded-xl border border-outline-variant/30 p-md shadow-sm">
+      <div class="mb-sm flex items-center justify-between gap-sm">
+        <div>
+          <div class="flex items-center gap-xs">
+            <span class="material-symbols-outlined text-[20px] text-primary">photo_library</span>
+            <h2 class="text-label-bold uppercase tracking-tight text-on-surface-variant" data-i18n="albumTitle">热门画册</h2>
+          </div>
+          <p class="mt-xs text-label-sm text-on-surface-variant" data-i18n="albumSubtitle">左右滑动查看热门举牌灵感合集</p>
+        </div>
+        <div class="flex items-center gap-xs">
+          <button
+            class="album-nav-btn rounded-full bg-surface-container-low p-xs text-on-surface-variant transition-all hover:bg-white hover:text-primary"
+            type="button"
+            data-carousel-nav="prev"
+            data-i18n-aria-label="albumPrevAria"
+            aria-label="向左滚动画册"
+          >
+            <span class="material-symbols-outlined text-[18px]">arrow_back_ios_new</span>
+          </button>
+          <button
+            class="album-nav-btn rounded-full bg-surface-container-low p-xs text-on-surface-variant transition-all hover:bg-white hover:text-primary"
+            type="button"
+            data-carousel-nav="next"
+            data-i18n-aria-label="albumNextAria"
+            aria-label="向右滚动画册"
+          >
+            <span class="material-symbols-outlined text-[18px]">arrow_forward_ios</span>
+          </button>
+        </div>
+      </div>
+
+      <div
+        id="album-carousel"
+        class="album-scroller -mx-xs flex snap-x snap-mandatory gap-sm overflow-x-auto px-xs pb-xs scroll-smooth"
+      >
+        <article
+          class="album-card album-card-active relative snap-start shrink-0 overflow-hidden rounded-xl border border-outline-variant/30 bg-white shadow-sm transition-all duration-300"
+          data-album-card
+          data-template-key="albumCard3Title"
+          data-image-src="img/3.png"
+          data-image-alt-key="albumImage3Alt"
+          tabindex="0"
+          role="button"
+        >
+          <span class="album-check material-symbols-outlined absolute right-sm top-sm rounded-full bg-secondary-container p-xs text-[16px] text-on-secondary-container shadow-sm">check</span>
+          <img class="h-36 w-[260px] object-cover" src="img/3.png" alt="五位女生一起举着空白木牌">
+          <div class="space-y-xs p-sm">
+            <div class="text-label-bold text-on-surface" data-i18n="albumCard3Title">搞怪整活</div>
+            <p class="text-label-sm text-on-surface-variant" data-i18n="albumCard3Desc">适合短视频、整蛊内容和社交分享的吸睛文案风格。</p>
+          </div>
+        </article>
+
+        <article
+          class="album-card relative snap-start shrink-0 overflow-hidden rounded-xl border border-outline-variant/30 bg-white shadow-sm transition-all duration-300"
+          data-album-card
+          data-template-key="albumCard2Title"
+          data-image-src="img/2.png"
+          data-image-alt-key="albumImage2Alt"
+          tabindex="0"
+          role="button"
+        >
+          <span class="album-check material-symbols-outlined absolute right-sm top-sm rounded-full bg-secondary-container p-xs text-[16px] text-on-secondary-container shadow-sm">check</span>
+          <img class="h-36 w-[260px] object-cover" src="img/2.png" alt="三位女生在暖色背景前举着木牌">
+          <div class="space-y-xs p-sm">
+            <div class="text-label-bold text-on-surface" data-i18n="albumCard2Title">节日祝福</div>
+            <p class="text-label-sm text-on-surface-variant" data-i18n="albumCard2Desc">用于节庆祝福、生日惊喜和派对互动的温暖场景。</p>
+          </div>
+        </article>
+
+        <article
+          class="album-card relative snap-start shrink-0 overflow-hidden rounded-xl border border-outline-variant/30 bg-white shadow-sm transition-all duration-300"
+          data-album-card
+          data-template-key="albumCard4Title"
+          data-image-src="img/4.png"
+          data-image-alt-key="albumImage4Alt"
+          tabindex="0"
+          role="button"
+        >
+          <span class="album-check material-symbols-outlined absolute right-sm top-sm rounded-full bg-secondary-container p-xs text-[16px] text-on-secondary-container shadow-sm">check</span>
+          <img class="h-36 w-[260px] object-cover" src="img/4.png" alt="蓝发女生在校园门口举着白色牌子">
+          <div class="space-y-xs p-sm">
+            <div class="text-label-bold text-on-surface" data-i18n="albumCard4Title">品牌宣传</div>
+            <p class="text-label-sm text-on-surface-variant" data-i18n="albumCard4Desc">适合品牌口号、产品卖点和商业场景展示的高质模板。</p>
+          </div>
+        </article>
+
+        <article
+          class="album-card relative snap-start shrink-0 overflow-hidden rounded-xl border border-outline-variant/30 bg-white shadow-sm transition-all duration-300"
+          data-album-card
+          data-template-key="albumCard5Title"
+          data-image-src="img/5.png"
+          data-image-alt-key="albumImage5Alt"
+          tabindex="0"
+          role="button"
+        >
+          <span class="album-check material-symbols-outlined absolute right-sm top-sm rounded-full bg-secondary-container p-xs text-[16px] text-on-secondary-container shadow-sm">check</span>
+          <img class="h-36 w-[260px] object-cover" src="img/5.png" alt="紫发女生在樱花校园里举着白色牌子">
+          <div class="space-y-xs p-sm">
+            <div class="text-label-bold text-on-surface" data-i18n="albumCard5Title">校园写真</div>
+            <p class="text-label-sm text-on-surface-variant" data-i18n="albumCard5Desc">适合毕业季、社团展示和清新校园主题的留念画面。</p>
+          </div>
+        </article>
+
+        <article
+          class="album-card relative snap-start shrink-0 overflow-hidden rounded-xl border border-outline-variant/30 bg-white shadow-sm transition-all duration-300"
+          data-album-card
+          data-template-key="albumCard6Title"
+          data-image-src="img/6.png"
+          data-image-alt-key="albumImage6Alt"
+          tabindex="0"
+          role="button"
+        >
+          <span class="album-check material-symbols-outlined absolute right-sm top-sm rounded-full bg-secondary-container p-xs text-[16px] text-on-secondary-container shadow-sm">check</span>
+          <img class="h-36 w-[260px] object-cover" src="img/6.png" alt="五位穿格纹校服的女生在户外举着白色牌子">
+          <div class="space-y-xs p-sm">
+            <div class="text-label-bold text-on-surface" data-i18n="albumCard6Title">合影举牌</div>
+            <p class="text-label-sm text-on-surface-variant" data-i18n="albumCard6Desc">适合团队合照、活动打卡和多人互动的青春场景。</p>
+          </div>
+        </article>
+
+        <article
+          class="album-card relative snap-start shrink-0 overflow-hidden rounded-xl border border-outline-variant/30 bg-white shadow-sm transition-all duration-300"
+          data-album-card
+          data-template-key="albumCard7Title"
+          data-image-src="img/7.png"
+          data-image-alt-key="albumImage7Alt"
+          tabindex="0"
+          role="button"
+        >
+          <span class="album-check material-symbols-outlined absolute right-sm top-sm rounded-full bg-secondary-container p-xs text-[16px] text-on-secondary-container shadow-sm">check</span>
+          <img class="h-36 w-[260px] object-cover" src="img/7.png" alt="六位角色在樱花校园里一起举着空白牌子">
+          <div class="space-y-xs p-sm">
+            <div class="text-label-bold text-on-surface" data-i18n="albumCard7Title">校园社团</div>
+            <p class="text-label-sm text-on-surface-variant" data-i18n="albumCard7Desc">适合社团招新、校园活动和多人主题海报的青春场景。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mt-xl flex w-full flex-col items-center justify-between gap-md bg-[#000000] px-margin-desktop py-xl md:flex-row">
+    <div class="text-headline-md font-headline-md text-[#ffffff]" data-i18n="brandName">举牌图生成器</div>
+    <div class="flex flex-col items-center gap-sm">
+      <div class="flex flex-wrap justify-center gap-md">
+        <a id="terms-link" class="!text-[16px] text-label-sm text-[#ffffff] transition-all duration-300 hover:text-[#ffffff] hover:underline" href="terms.html" data-i18n="footerTerms">服务条款</a>
+        <a id="privacy-link" class="!text-[16px] text-label-sm text-[#ffffff] transition-all duration-300 hover:text-[#ffffff] hover:underline" href="privacy.html" data-i18n="footerPrivacy">隐私政策</a>
+        <button
+          id="support-trigger"
+          class="!text-[16px] text-label-sm text-[#ffffff] transition-all duration-300 hover:text-[#ffffff] hover:underline"
+          type="button"
+          data-i18n="footerSupport"
+        >
+          联系支持
+        </button>
+        <a class="hidden text-label-sm text-[#ffffff] transition-all duration-300 hover:text-[#ffffff] hover:underline" href="#" data-i18n="footerApi">API 文档</a>
+      </div>
+      <a
+        class="!text-[16px] text-label-sm text-[#9ca3af] transition-all duration-300 hover:text-[#d1d5db] hover:underline"
+        href="https://beian.miit.gov.cn/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        粤ICP备2026075417号
+      </a>
+    </div>
+    <div class="!text-[16px] text-label-sm text-[#ffffff]" data-i18n="footerCopyright">© 2026 举牌图生成器. 保留所有权利。</div>
+  </footer>
+  <div id="support-modal" class="hidden fixed inset-0 z-[70] items-center justify-center bg-black/55 px-base py-lg">
+    <div class="w-full max-w-[520px] rounded-xl bg-white p-lg shadow-2xl">
+      <div class="flex items-start justify-between gap-base">
+        <div>
+          <p class="text-headline-md font-headline-md text-primary" data-i18n="supportModalTitle">联系支持</p>
+          <p class="mt-xs text-body-md text-on-surface-variant" data-i18n="supportModalDesc">如遇下载失败、模板显示异常或其他问题，可以通过以下邮箱联系我们。</p>
+        </div>
+        <button
+          id="support-close"
+          class="rounded-full bg-surface-container-low p-xs text-on-surface-variant transition-colors hover:bg-surface-container hover:text-primary"
+          type="button"
+          data-i18n-aria-label="supportCloseAria"
+          aria-label="关闭联系支持弹窗"
+        >
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+      <div class="mt-base rounded-xl bg-surface-container-low p-md">
+        <p class="text-label-sm font-label-bold uppercase tracking-wider text-on-surface-variant" data-i18n="supportEmailLabel">支持邮箱</p>
+        <div class="mt-sm flex flex-col gap-sm sm:flex-row sm:items-center sm:justify-between">
+          <div id="support-email" class="break-all text-[18px] font-semibold text-on-surface">401642796@qq.com</div>
+          <button
+            id="support-copy"
+            class="rounded-full bg-primary px-md py-xs font-label-bold text-on-primary transition-all hover:shadow-lg active:scale-95"
+            type="button"
+            data-i18n="supportCopy"
+          >
+            复制邮箱
+          </button>
+        </div>
+      </div>
+      <div class="mt-base space-y-xs text-body-md text-on-surface-variant">
+        <p data-i18n="supportFriendlyNote">建议在邮件中附上问题描述、浏览器名称、设备信息以及相关截图，这样我们可以更快帮你定位问题。</p>
+        <p data-i18n="supportResponseNote">我们通常会在 1-3 个工作日内回复，请留意你的收件箱和垃圾邮件箱。</p>
+      </div>
+    </div>
+  </div>
+  <script src="js/app.js"></script>
+</body>
+</html>

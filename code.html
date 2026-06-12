@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SignGen AI Editor - Create Your Custom Sign</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&amp;family=Public+Sans:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#351000",
+                    "primary-container": "#2e5bff",
+                    "on-surface": "#191c1d",
+                    "on-error": "#ffffff",
+                    "on-surface-variant": "#434656",
+                    "secondary-container": "#a6f2cf",
+                    "outline": "#747688",
+                    "error-container": "#ffdad6",
+                    "surface-variant": "#e1e3e4",
+                    "inverse-primary": "#b8c3ff",
+                    "tertiary-fixed-dim": "#ffb693",
+                    "surface-container": "#edeeef",
+                    "surface-dim": "#d9dadb",
+                    "outline-variant": "#c4c5d9",
+                    "on-primary-fixed-variant": "#0035be",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#e1e3e4",
+                    "on-secondary-container": "#247155",
+                    "on-secondary-fixed": "#002115",
+                    "error": "#ba1a1a",
+                    "on-primary-container": "#efefff",
+                    "tertiary": "#903a00",
+                    "primary-fixed-dim": "#b8c3ff",
+                    "on-background": "#191c1d",
+                    "surface-container-low": "#f3f4f5",
+                    "primary-fixed": "#dde1ff",
+                    "inverse-on-surface": "#f0f1f2",
+                    "on-tertiary-container": "#ffece5",
+                    "secondary-fixed-dim": "#8bd6b4",
+                    "surface-bright": "#f8f9fa",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed": "#a6f2cf",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary": "#1b6b4f",
+                    "on-tertiary-fixed-variant": "#7a3000",
+                    "on-secondary-fixed-variant": "#00513a",
+                    "inverse-surface": "#2e3132",
+                    "on-primary-fixed": "#001356",
+                    "background": "#f8f9fa",
+                    "surface": "#f8f9fa",
+                    "tertiary-container": "#b25015",
+                    "tertiary-fixed": "#ffdbcb",
+                    "surface-tint": "#124af0",
+                    "on-primary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "primary": "#0040e0"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "48px",
+                    "base": "8px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "40px",
+                    "xs": "4px",
+                    "xl": "80px",
+                    "gutter": "20px",
+                    "sm": "12px",
+                    "md": "24px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Public Sans"],
+                    "body-md": ["Public Sans"],
+                    "headline-md": ["Quicksand"],
+                    "headline-xl": ["Quicksand"],
+                    "body-lg": ["Public Sans"],
+                    "headline-lg-mobile": ["Quicksand"],
+                    "headline-lg": ["Quicksand"],
+                    "label-bold": ["Public Sans"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "headline-xl": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "label-bold": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        h1, h2, h3 { font-family: 'Quicksand', sans-serif; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .sign-canvas {
+            perspective: 1000px;
+        }
+        .dynamic-sign-text {
+            transform: rotateX(2deg) rotateY(-5deg);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface transition-colors duration-300">
+<!-- TopNavBar -->
+<header class="bg-surface/80 backdrop-blur-md shadow-sm sticky top-0 z-50 flex justify-between items-center w-full px-margin-desktop py-base max-w-full">
+<div class="text-headline-md font-headline-xl text-primary tracking-tight">SignGen</div>
+<nav class="hidden md:flex gap-md items-center">
+<a class="text-on-surface-variant font-label-bold hover:text-primary transition-colors duration-200" href="#">Gallery</a>
+<a class="text-on-surface-variant font-label-bold hover:text-primary transition-colors duration-200" href="#">How it Works</a>
+<a class="text-on-surface-variant font-label-bold hover:text-primary transition-colors duration-200" href="#">Pricing</a>
+</nav>
+<div class="flex items-center gap-sm">
+<button class="bg-primary text-on-primary px-md py-xs rounded-full font-label-bold hover:shadow-lg active:scale-95 transition-all">Create Sign</button>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer" data-icon="account_circle">account_circle</span>
+</div>
+</header>
+<main class="min-h-screen max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop py-base">
+<!-- Breadcrumb & Top Bar -->
+<div class="flex items-center justify-between py-base mb-base">
+<a class="flex items-center gap-xs text-primary font-label-bold hover:underline transition-all group" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_back">arrow_back</span>
+                Back to Gallery
+            </a>
+<div class="hidden sm:flex items-center gap-sm">
+<span class="bg-tertiary-fixed text-on-tertiary-fixed px-sm py-xs rounded-full text-label-sm font-label-bold">DRAFT SAVED</span>
+<span class="text-on-surface-variant text-label-sm">Autosave: 2m ago</span>
+</div>
+</div>
+<!-- Two Column Editor Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-md items-start">
+<!-- Left Column: The Canvas -->
+<div class="lg:col-span-7 xl:col-span-8 sticky top-24">
+<div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden shadow-xl bg-surface-container-highest flex items-center justify-center">
+<img alt="Character Template" class="absolute inset-0 w-full h-full object-cover" data-alt="A professional high-quality studio photograph of a friendly young character with a creative aesthetic, standing in a bright minimalist room. They are holding a large, blank rectangular physical sign board tilted slightly toward the camera. The lighting is soft and high-key with an electric blue and mint green color palette, creating a modern and vibrant atmosphere. The background is a clean white studio with soft ambient shadows." id="sign-preview-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArqW1kw9TlYVMJ_Vqcu8NcJ8WeLKnEPuiarh40Db8SeH_Ny4PiQZPGcUglqZ_b2JBUaB_8e2PVokp5CZ60144EwA1eFxoAmxS0c93vuR5AUQOOuTK83eaMlf7ymQQ2s-_IyoRlF6O28UnMFBDWfsVObRQLfqZpYC8roSVf0y0DxPya3T80aXMCmDk1GRO5gZWHy2cktEUtaXlgKIAc85GOb5HPDIfUL2gw3WkBFn3gCAbolD1ATWZCOmZLzcEZuplMdYY5N_usFguf"/>
+<!-- Dynamic Text Overlay Layer -->
+<div class="relative z-10 w-[60%] h-[40%] flex items-center justify-center pointer-events-none">
+<div class="dynamic-sign-text w-full text-center px-base font-bold text-[#1a1a1a] transition-all duration-300" id="dynamic-text-container" style="font-size: 32px; font-family: 'Quicksand';">
+                            Your Awesome Sign Text Here
+                        </div>
+</div>
+<!-- Overlay Controls -->
+<div class="absolute bottom-base right-base flex gap-xs">
+<button class="bg-surface/90 p-xs rounded-lg shadow-sm hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="zoom_in">zoom_in</span>
+</button>
+<button class="bg-surface/90 p-xs rounded-lg shadow-sm hover:bg-white transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="fullscreen">fullscreen</span>
+</button>
+</div>
+</div>
+<div class="mt-md flex justify-between items-center text-on-surface-variant font-label-sm uppercase tracking-wider">
+<span>Template: Creative Workspace Guy</span>
+<div class="flex gap-sm">
+<button class="hover:text-primary transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]" data-icon="replay">replay</span> Reset
+                        </button>
+<button class="hover:text-primary transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]" data-icon="share">share</span> Share Preview
+                        </button>
+</div>
+</div>
+</div>
+<!-- Right Column: Control Panel -->
+<div class="lg:col-span-5 xl:col-span-4 space-y-md">
+<!-- Section 1: Your Message -->
+<div class="glass-card p-md rounded-xl shadow-sm border border-outline-variant/30">
+<div class="flex items-center gap-xs mb-sm">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="edit_note">edit_note</span>
+<h3 class="text-label-bold uppercase tracking-tight text-on-surface-variant">Your Message</h3>
+</div>
+<textarea class="w-full bg-surface-container-low border-none rounded-lg p-sm font-body-md text-on-surface focus:ring-2 focus:ring-primary-container transition-all resize-none" id="message-input" placeholder="Type what your sign should say..." rows="4"></textarea>
+<div class="mt-xs flex justify-between text-label-sm text-outline">
+<span>Max 60 characters</span>
+<span id="char-count">0/60</span>
+</div>
+</div>
+<!-- Section 2: Style Your Text -->
+<div class="glass-card p-md rounded-xl shadow-sm border border-outline-variant/30">
+<div class="flex items-center gap-xs mb-sm">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="format_paint">format_paint</span>
+<h3 class="text-label-bold uppercase tracking-tight text-on-surface-variant">Style Your Text</h3>
+</div>
+<div class="space-y-base">
+<label class="block text-label-sm font-label-bold text-on-surface-variant mb-xs">Font Family</label>
+<div class="grid grid-cols-2 gap-xs">
+<button class="font-selector-btn active-font p-xs text-left rounded-lg bg-primary-container text-white border border-primary transition-all font-headline-md text-[14px]" onclick="updateFont('Quicksand')">Modern Bold</button>
+<button class="font-selector-btn p-xs text-left rounded-lg bg-surface-container text-on-surface-variant border border-transparent hover:border-outline-variant transition-all font-body-md text-[14px]" onclick="updateFont('Public Sans')">Clean Sans</button>
+<button class="font-selector-btn p-xs text-left rounded-lg bg-surface-container text-on-surface-variant border border-transparent hover:border-outline-variant transition-all font-serif text-[14px]" onclick="updateFont('Impact')">Headline Impact</button>
+<button class="font-selector-btn p-xs text-left rounded-lg bg-surface-container text-on-surface-variant border border-transparent hover:border-outline-variant transition-all font-cursive text-[14px]" onclick="updateFont('Cursive')">Handwritten</button>
+</div>
+<div class="pt-sm">
+<div class="flex justify-between items-center mb-xs">
+<label class="text-label-sm font-label-bold text-on-surface-variant">Text Size</label>
+<span class="text-label-sm font-label-bold text-primary" id="size-val">32px</span>
+</div>
+<input class="w-full h-2 bg-surface-container-highest rounded-full appearance-none cursor-pointer accent-primary" id="size-slider" max="64" min="16" type="range" value="32"/>
+</div>
+</div>
+</div>
+<!-- Section 3: Text Alignment -->
+<div class="glass-card p-md rounded-xl shadow-sm border border-outline-variant/30">
+<div class="flex items-center gap-xs mb-sm">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="format_align_center">format_align_center</span>
+<h3 class="text-label-bold uppercase tracking-tight text-on-surface-variant">Text Alignment</h3>
+</div>
+<div class="flex bg-surface-container-low p-xs rounded-xl">
+<button class="align-btn flex-1 py-xs rounded-lg flex justify-center hover:bg-surface transition-all" onclick="updateAlign('left')">
+<span class="material-symbols-outlined" data-icon="format_align_left">format_align_left</span>
+</button>
+<button class="align-btn active-align flex-1 py-xs rounded-lg bg-white shadow-sm flex justify-center transition-all" onclick="updateAlign('center')">
+<span class="material-symbols-outlined text-primary" data-icon="format_align_center">format_align_center</span>
+</button>
+<button class="align-btn flex-1 py-xs rounded-lg flex justify-center hover:bg-surface transition-all" onclick="updateAlign('right')">
+<span class="material-symbols-outlined" data-icon="format_align_right">format_align_right</span>
+</button>
+</div>
+</div>
+<!-- Section 4: Generation -->
+<div class="pt-base">
+<button class="w-full group relative overflow-hidden bg-primary text-on-primary font-headline-md py-md rounded-xl shadow-lg hover:shadow-primary-container/40 hover:-translate-y-1 active:scale-[0.98] transition-all" id="generate-btn">
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+<span class="relative flex items-center justify-center gap-sm">
+                            Generate Final Image
+                            <span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+</span>
+</button>
+<p class="text-center text-label-sm text-outline mt-sm flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[14px]" data-icon="bolt">bolt</span> Generates in ~5 seconds
+                    </p>
+</div>
+<!-- Chips Section -->
+<div class="flex flex-wrap gap-xs pt-base">
+<div class="bg-tertiary-container text-on-tertiary-container px-sm py-xs rounded-full text-label-sm font-label-bold flex items-center gap-xs shadow-sm">
+<span class="material-symbols-outlined text-[14px]" data-icon="trending_up">trending_up</span> Trending Template
+                    </div>
+<div class="bg-secondary-container text-on-secondary-container px-sm py-xs rounded-full text-label-sm font-label-bold flex items-center gap-xs shadow-sm">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified">verified</span> High Res
+                    </div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low flex flex-col md:flex-row justify-between items-center px-margin-desktop py-xl w-full gap-md mt-xl">
+<div class="text-headline-md font-headline-md text-primary">SignGen AI</div>
+<div class="flex flex-wrap justify-center gap-md">
+<a class="text-on-surface-variant font-label-sm hover:underline hover:text-primary transition-all duration-300" href="#">Terms of Service</a>
+<a class="text-on-surface-variant font-label-sm hover:underline hover:text-primary transition-all duration-300" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant font-label-sm hover:underline hover:text-primary transition-all duration-300" href="#">Contact Support</a>
+<a class="text-on-surface-variant font-label-sm hover:underline hover:text-primary transition-all duration-300" href="#">API Documentation</a>
+</div>
+<div class="text-on-surface-variant text-label-sm">© 2024 SignGen AI. All rights reserved.</div>
+</footer>
+<script>
+        const messageInput = document.getElementById('message-input');
+        const previewText = document.getElementById('dynamic-text-container');
+        const charCount = document.getElementById('char-count');
+        const sizeSlider = document.getElementById('size-slider');
+        const sizeVal = document.getElementById('size-val');
+
+        // Real-time Text Update
+        messageInput.addEventListener('input', (e) => {
+            const text = e.target.value;
+            if (text.length <= 60) {
+                previewText.innerText = text || "Your Awesome Sign Text Here";
+                charCount.innerText = `${text.length}/60`;
+                charCount.classList.toggle('text-error', text.length > 55);
+            } else {
+                messageInput.value = text.substring(0, 60);
+            }
+        });
+
+        // Font Size Update
+        sizeSlider.addEventListener('input', (e) => {
+            const val = e.target.value;
+            previewText.style.fontSize = `${val}px`;
+            sizeVal.innerText = `${val}px`;
+        });
+
+        // Update Font
+        function updateFont(font) {
+            previewText.style.fontFamily = font;
+            
+            // UI Toggle
+            document.querySelectorAll('.font-selector-btn').forEach(btn => {
+                btn.classList.remove('bg-primary-container', 'text-white', 'border-primary');
+                btn.classList.add('bg-surface-container', 'text-on-surface-variant', 'border-transparent');
+            });
+            event.currentTarget.classList.remove('bg-surface-container', 'text-on-surface-variant', 'border-transparent');
+            event.currentTarget.classList.add('bg-primary-container', 'text-white', 'border-primary');
+        }
+
+        // Update Alignment
+        function updateAlign(dir) {
+            previewText.style.textAlign = dir;
+            
+            // UI Toggle
+            document.querySelectorAll('.align-btn').forEach(btn => {
+                btn.classList.remove('bg-white', 'shadow-sm');
+                btn.querySelector('span').classList.remove('text-primary');
+            });
+            const btn = event.currentTarget;
+            btn.classList.add('bg-white', 'shadow-sm');
+            btn.querySelector('span').classList.add('text-primary');
+        }
+
+        // Generate Interaction
+        const genBtn = document.getElementById('generate-btn');
+        genBtn.addEventListener('click', () => {
+            const originalText = genBtn.innerHTML;
+            genBtn.disabled = true;
+            genBtn.innerHTML = `
+                <span class="flex items-center gap-sm">
+                    <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Processing...
+                </span>
+            `;
+            
+            setTimeout(() => {
+                genBtn.innerHTML = originalText;
+                genBtn.disabled = false;
+                alert("Generation started! Your final sign will be ready in the gallery shortly.");
+            }, 3000);
+        });
+    </script>
+</body></html>
